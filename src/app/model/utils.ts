@@ -44,7 +44,7 @@ export class Utils {
     } else if (q.abs().lessThan(Number.EPSILON)) { // q = 0 -> t^3 + pt = 0 -> t(t^2+p)=0
       roots = [new Decimal(0)].concat(p.lessThan(0) ? [(p.times(-1)).sqrt(), (p.times(-1)).sqrt().times(-1)] : [])
     } else {
-      const D = q.pow(2).div(new Decimal(4).plus(p.pow(3).div(27)))
+      const D = q.pow(2).div(4).plus(p.pow(3).div(27))
       // console.log("D: " + D.toString())
 
       if (D.abs().lessThan(Number.EPSILON)) {       // D = 0 -> two roots
