@@ -1,0 +1,31 @@
+name: Build and Deploy Angular 4 App
+
+on:
+  push:
+    branches:
+      - main   # hoặc branch bạn đang dùng
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Angular app
+        run: ./node_modules/.bin/ng build --prod --base-href "/IdleAnt/"
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist
